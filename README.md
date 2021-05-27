@@ -1,7 +1,9 @@
 # XRRpred-docker
 This is the docker version of the [XRRpred](http://biomine.cs.vcu.edu/servers/XRRPred/): predictor of resolution and r-free in protein X-ray crystallography
 
-You only need docker, access to dockerhub, and the files in this repository to run the tool. It is tested on Ubuntu 20.04.2 LTS (and docker version detailed in `docker_version.txt`), but it should work on any docker implementation. If you prefer to installl it directly on your machine or to retrain the model, you should use the [other repository](https://github.com/sinaghadermarzi/XRRpred-predictor), which requires you to set up the dependencies like iupred, asaquick. However for using the tool for prediction, it is strongly recommended to use the docker approach explained here. 
+You only need docker, access to dockerhub, and the files in this repository to run the tool. It is tested on Ubuntu 20.04.2 LTS (and docker version detailed in `docker_version.txt`), but it should work on any docker implementation. 
+
+If you prefer to installl it directly on your machine or to retrain the model, you should use the [other repository](https://github.com/sinaghadermarzi/XRRpred-predictor), which requires you to set up the dependencies like iupred, asaquick. However for using the tool for prediction, it is strongly recommended to use the docker approach explained here. 
 
 ## Instructions for running XRRpred
 after cloning (or downloading and extracting) the repository, the next step is to build the image by entering the following command in the root folder of the repository:
