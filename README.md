@@ -9,12 +9,13 @@ after coloning (or downloading and extracting) the repository, the next step is 
 docker build -t xrrpred docker_context -f XRRpred.dockerfile
 ```
 This creates a docker image named `xrrpred`. 
-To run XRRpred on an input fasta (formatted like the example included in the repostiory named `example.fasta`), you should enter the following command:
+To run XRRpred on an input fasta, you should enter the following command:
 ```
 docker run -i  xrrpred XRRpred/dockerinout < example.fasta > results.tar.gz
 ```
-`example.fasta` is the path to input file and `results.tar.gz` is the path to output file.
 
+`example.fasta` is the path to input file and `results.tar.gz` is the path to output file.
+(input fasta file should be formatted like the file `example.fasta` included in the repostiory)
 
 ### format of input fasta file:
 XRRPred accepts one or more proteins as input. The input protein sequences should be in the FASTA format, where for the multiple-chain proteins the chain sequences must use the same prefix in their ID (before the underscore). Example below shows the formatting for two proteins where proteinID1 has two chains (chainID1 and chainID2) and proteinID2 has one chain.
