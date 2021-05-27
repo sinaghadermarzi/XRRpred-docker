@@ -1,0 +1,67 @@
+!       GENN V.2-3
+!       Eshel Faraggi 2007-2013 (c)
+
+!       ASAquick V.1
+!       Eshel Faraggi 2013 (c)
+
+!	Research and Information Systems, LLC, Carmel, Indiana, 46032, USA
+!	www.mamiris.com
+!	Kloczkowski Lab, The Research Institute, Nationwide Children's Hospital, Columbus, Ohio, USA
+
+!!!!!!! All Rights Reserved !!!!!!! 
+See license for what you can and cannot do with this software.
+
+These notes assume you are running a BASH terminal on a Linux machine (tested on Ubuntu 12.10).
+
+To install:
+
+1. Download .tgz file. 
+
+2. Uncompress it: tar -xzf GENN+ASAquick.tgz
+
+3. Go to directory: cd GENN+ASAquick
+
+4. And install: ./install
+
+To install GENN+ASAquick you must have gfortran, sed, and bc. Type these at a BASH terminal prompt to see if you have them or how to get them.
+
+NOTE ABOUT $PATH: ~/bin/ should be in your PATH variable (echo $PATH to see it). By default it should be there (even if you didn't have a bin directory before this installation). This install will create it. If for some reason your bin is not in your PATH you will need to either re-login to your machine, or if that fails type something like
+
+export PATH=$PATH:$HOME/bin
+
+At a BASH prompt. Put this line in your .profile file (etcetera) to automate it.
+
+If you want to reinstall GENN+ASAquick you should remove the file gennstld in the directory where the install file is at.
+
+
+GENN
+----
+GENN is a general neural network that is designed to train on any data. Consult the article describing its uses or give a '-h' option for some help. An example of a database on which GENN was trained to predict ASA is given in GENN/example. The file genn.in is the general input file and the database db/ contains a sample of 100 proteins from the proteins used to train ASAquick. A simple command line to preform the training is
+
+genn2wind.e -l genn.in
+
+This will generate a weights file that can be used for prediction with either -pr1 or -prl options. Manipulation of the neural network parameters occurs through the command line, run
+
+genn2wind.e -h to see the options available.
+
+
+ASAquick
+--------
+To run ASAquick use
+
+ASAquick your-file
+
+Where your-file is either a fasta file or a dsspget file. dsspget is our own personal system of recording the crystallographer index, amino acid type, 8-state-dssp-ss, 3-stat-dssp-ss, ASA, phi, psi. You can make such a file from a PDB file using pdb2dsspget.pl, or from a fasta file using fasta2dsspget.pl. Both programs are provided with this distribution and should be in your ~/bin/ and ready to use if installation completed successfully.
+
+LARGE DATA AMOUNTS
+------------------
+ASAquick was designed to predict one file at a time. Its pretty quick so you can analyze many proteins just using it. However, if you have large amounts of data it will be beneficial for you to go through the script of ASAquick and learn how to use genn2wind.e. Basically you type at prompt
+
+genn2wind.e -aw [ASAquickPATH]/ASAq.wei/list.weights -prl [your-protein-list] -d [/path/to/database/]
+
+[] here means that a human change is needed.
+
+This will generate the predictions quicker. You will need to generate a list of your protein ids and a database of the input/output files in directories named as your ids. See the ASAquick script to figure out which program produce what input/output.
+
+ENJOY!!!
+

@@ -1,0 +1,30 @@
+!       ASAquick V.1
+!       Eshel Faraggi 2013 (c)
+
+!	Research and Information Systems, LLC, Carmel, Indiana, 46032, USA
+!	www.mamiris.com
+!	Kloczkowski Lab, The Research Institute, Nationwide Children's Hospital, Columbus, Ohio, USA
+
+!!!!!!! All Rights Reserved !!!!!!! 
+See license for what you can and cannot do with this software.
+
+ASAquick
+--------
+To run ASAquick use
+
+ASAquick your-file
+
+Where your-file is either a fasta file or a dsspget file. dsspget is our own personal system of recording the crystallographer index, amino acid type, 8-state-dssp-ss, 3-stat-dssp-ss, ASA, phi, psi. You can make such a file from a PDB file using pdb2dsspget.pl, or from a fasta file using fasta2dsspget.pl. Both programs are provided with this distribution and should be in your ~/bin/ and ready to use if installation completed successfully.
+
+LARGE DATA AMOUNTS
+------------------
+ASAquick was designed to predict one file at a time. Its pretty quick so you can analyze many proteins just using it. However, if you have large amounts of data it will be beneficial for you to go through the script of ASAquick and learn how to use genn2wind.e. Basically you type at prompt
+
+genn2wind.e -aw [ASAquickPATH]/ASAq.wei/list.weights -prl [your-protein-list] -d [/path/to/database/]
+
+[] here means that a human change is needed.
+
+This will generate the predictions quicker. You will need to generate a list of your protein ids and a database of the input/output files in directories named as your ids. See the ASAquick script to figure out which program produce what input/output.
+
+ENJOY!!!
+

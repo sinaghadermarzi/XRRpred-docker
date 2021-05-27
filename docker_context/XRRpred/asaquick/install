@@ -1,0 +1,39 @@
+#!/bin/bash
+
+echo "
+!	INSTALLER:
+!       GENN V.2-3
+!       ASAquick V.1
+!       Eshel Faraggi 2013 (c)
+!	www.mamiris.com
+!	www.mathmed.org
+"
+
+pdr=$PWD
+bsdr=`readlink -f $0`
+bsdr=`dirname $bsdr`
+
+if [ ! -s "$bsdr/gennstld" ]; then
+  echo 1 > "$bsdr/gennstld"
+  cd "$bsdr/GENN/source/"
+  gfortran -ffree-line-length-none -O2 -o genn2wind.e genn2wind.f90
+  gfortran -ffree-line-length-none -O2 -o genn2inst.e genn2inst.f90
+  mv *.e $bsdr/bin/
+  cd "$bsdr/bin"
+  cp "$bsdr/ASAquick/ASAquick" ./
+  sed -e "s|ASAqweiXXX|$bsdr/ASAquick/ASAq.wei/|" -i ASAquick
+  cd "$bsdr/ASAquick/ASAq.wei"
+  cat list.template | sed -e "s|ASAquickXXX|$bsdr/ASAquick|" > list.weights
+  cd "$bsdr/GENN/example"
+  cat genn.head | sed -e "s|ASAqweiXXX|$bsdr/GENN/example/db/|" > genn.in
+  cat db.list >> genn.in
+  mkdir -p ~/bin/
+  ln -s "$bsdr/bin/"* ~/bin/
+  echo GENN and ASAquick were installed succesfuly
+  echo Run: ASAquick 16VPA.dsspget
+  echo to see example
+else
+  echo "ASAquick exists on system? To reinstall remove $bsdr/gennstld"
+  exit -1
+fi
+

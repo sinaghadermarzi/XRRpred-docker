@@ -1,0 +1,34 @@
+#!/bin/bash
+if [ ! -s "$1" ] ; then
+  echo "Not a valid dsspget file $1. Aborting"
+  exit -1
+fi
+
+infl=$1
+
+dr="asaq.`basename $infl`"
+
+if [ ! -d "$dr" ]; then
+  mkdir "$dr"
+  n=`tail -1 "$infl"  | wc | awk '{print $2}'`
+  if [ "$n" -eq 7 ] ; then
+    cp "$infl" "$dr/dsspget"
+  else
+    fasta2dsspget.pl "$infl" > "$dr/dsspget"
+    infl="$dr/dsspget"
+  fi
+  mkasa.minmax "$infl" > "$dr/asa2minmax"
+  echo scale=3\;`cat "$infl" | wc -l` / 1000 | bc > "$dr/genn.gin"
+  mkaacomp "$infl" >> "$dr/genn.gin"
+  mkdimercomp "$infl" >> "$dr/genn.gin"
+  mkblosnorm "$infl" > "$dr/blosnorm"
+  mkphyspar "$infl" > "$dr/physpar"
+#  awk '{print $1,$2,-1}' "$dr/physpar" > "$dr/asa2minmax"
+fi
+
+genn2wind.e -aw "ASAqweiXXX/list.weights" -pr1 "$dr" -d . | awk '{print $2,$3,$4,$5}' > "$dr/rasaq.pred"
+echo "Relative ASA (rasa) prediction in $dr/rasaq.pred, last colums is STDEV"
+mkminmax2asa "$dr/rasaq.pred" 3 > "$dr/asaqp.pred"
+paste "$dr/asaqp.pred" "$dr/rasaq.pred" | awk '{print $1,$2,$3,200*$7}' > "$dr/asaq.pred"
+rm "$dr/asaqp.pred"
+echo "ASA prediction in $dr/asaq.pred, last colums is error estimate in percent"

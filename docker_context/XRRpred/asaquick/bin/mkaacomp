@@ -1,0 +1,37 @@
+#!/usr/bin/perl
+#
+#  Program to make AA composition 
+#  Eshel Faraggi 2007-2013 (C)
+#
+
+if ($#ARGV>=0)
+  {
+  $ff = $ARGV[0];
+  open (PPFL, "$ff") or die "Can't find file $ff\n"; @indat = <PPFL>; close(PPFL);
+  }
+else
+  {
+  die "Use $0 dsspget_file\n";
+  }
+
+@aapp =
+("A","C","D","E","F","G","H","I","K","L","M","N","P","Q","R","S","T",
+"V","W","Y","X","B","Z","!","-");
+
+@u = 0;
+for (@indat)
+  {
+  @tmp = split;
+  $seq = $tmp[1];
+  $u{$seq}++;
+  }
+
+$c = $#indat;
+die "Empty file or too short ($ff , $c)? Aborting " if ($c<20);
+
+for (@aapp)
+  {
+  printf(" %f\n",$u{$_}/$c); 
+  }
+
+__END__

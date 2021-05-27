@@ -1,0 +1,24 @@
+!       GENN V.2-3
+!       Eshel Faraggi 2007-2013 (c)
+
+!	Research and Information Systems, LLC, Carmel, Indiana, 46032, USA
+!	www.mamiris.com
+!	Kloczkowski Lab, The Research Institute, Nationwide Children's Hospital, Columbus, Ohio, USA
+
+!!!!!!! All Rights Reserved !!!!!!! 
+See license for what you can and cannot do with this software.
+
+
+GENN
+----
+GENN is a general neural network that is designed to train on any data. Consult the article describing its uses or give a '-h' option for some help. An example of a database on which GENN was trained to predict ASA is given in GENN/example. The file genn.in is the general input file and the database db/ contains a sample of 100 proteins from the proteins used to train ASAquick. A simple command line to preform the training is
+
+genn2wind.e -l genn.in
+
+This will generate a weights file that can be used for prediction with either -pr1 or -prl options. Manipulation of the neural network parameters occurs through the command line, run
+
+genn2wind.e -h to see the options available.
+
+
+ENJOY!!!
+

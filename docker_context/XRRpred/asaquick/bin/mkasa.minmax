@@ -1,0 +1,63 @@
+#!/usr/bin/perl
+#
+#  Program to make RASA from ASA of ASAquick 
+#  Eshel Faraggi 2007-2013 (C)
+#
+
+if ($#ARGV>=0)
+  {
+  $ff = $ARGV[0];
+  open (PPFL, "$ff") or die "Can't find file $ff\n"; @indat = <PPFL>; close(PPFL);
+  }
+else
+  {
+  die "Use $0 dsspget_file\n";
+  }
+
+@aapp =
+("A   0   204",
+" C   0   210",
+" D   0   258",
+" E   0   274",
+" F   0   275",
+" G   0   195",
+" H   0   307",
+" I   0   266",
+" K   0   313",
+" L   0   294",
+" M   0   274",
+" N   0   261",
+" P   0   232",
+" Q   0   273",
+" R   0   337",
+" S   0   236",
+" T   0   236",
+" V   0   241",
+" W   0   320",
+" X   0   164",
+" Y   0   346",
+" Z   0   205");
+
+@u = undef;
+for (@aapp)
+  {
+  @tmp = split;
+  $ua{$tmp[0]} = $tmp[1];
+  $us{$tmp[0]} = $tmp[2];
+  }
+
+for (@indat)
+  {
+  @tmp = split;
+  $cri = $tmp[0];
+  $seq = $tmp[1];
+  $asa = $tmp[4];
+  if (defined($ua{$seq})) {
+    printf(" %s %s %s\n",$cri,$seq,2.0*(($asa-$ua{$seq})/($us{$seq}-$ua{$seq})-0.5)); }
+  else {
+    printf(" %s %s %s\n",$cri,$seq,$asa);
+    print STDERR "Unknown residue $seq, in $ff\n";
+    }
+  }
+
+__END__
