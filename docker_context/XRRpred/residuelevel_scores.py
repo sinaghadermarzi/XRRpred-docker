@@ -8,7 +8,7 @@ from string import digits
 from gen_taskid import gen_taskid
 
 #folder paths without slash
-DEBUG = True
+DEBUG = False
 this_script_directory = os.path.dirname(os.path.realpath(__file__))
 iupred_dir = os.path.abspath(this_script_directory+"/iupred")
 asaquick_dir = os.path.abspath(this_script_directory+"/asaquick/bin")
